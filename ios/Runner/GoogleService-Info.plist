@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1044994375078-ke6j6e1jgnv9e35563hmdad2jlceli5b.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1044994375078-ke6j6e1jgnv9e35563hmdad2jlceli5b</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>1044994375078-6qtjniqemi7eha369mdagr181mjv0vlr.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAH75Zzk-H7sY8sEH_UYDLcgrpZ8klgLDY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1044994375078</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.videoCallApp</string>
+	<key>PROJECT_ID</key>
+	<string>video-call-app-cec86</string>
+	<key>STORAGE_BUCKET</key>
+	<string>video-call-app-cec86.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1044994375078:ios:c05f8c632e3053bd82a367</string>
+	<key>DATABASE_URL</key>
+	<string>https://video-call-app-cec86.firebaseio.com</string>
+</dict>
+</plist>

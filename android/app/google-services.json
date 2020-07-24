@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1044994375078",
+    "firebase_url": "https://video-call-app-cec86.firebaseio.com",
+    "project_id": "video-call-app-cec86",
+    "storage_bucket": "video-call-app-cec86.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1044994375078:android:44d6b6fbb50acd5a82a367",
+        "android_client_info": {
+          "package_name": "com.example.video_call_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1044994375078-imddodussnps5j133g8b833kech4gutj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.video_call_app",
+            "certificate_hash": "dafb278f4a1c4c8bb1b919fab97c1edf74d61243"
+          }
+        },
+        {
+          "client_id": "1044994375078-k567t50hfu99cd94jsopoglfhp643f2m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMOnvOZijfI6_DdozhaAs8qrrYBYbyylo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1044994375078-k567t50hfu99cd94jsopoglfhp643f2m.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1044994375078-ke6j6e1jgnv9e35563hmdad2jlceli5b.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.videoCallApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
