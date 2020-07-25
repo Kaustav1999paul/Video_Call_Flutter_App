@@ -1,55 +1,61 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:video_call_app/resources/auth_methods.dart';
 import 'package:video_call_app/resources/firebase_repository.dart';
 import 'package:video_call_app/screens/homeScreen.dart';
+import 'package:video_call_app/utils/universal_variables.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  LoginScreenState createState() => LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  FirebaseRepository _repository = FirebaseRepository();
+class LoginScreenState extends State<LoginScreen> {
+  final AuthMethods _authMethods = AuthMethods();
+
+  bool isLoginPressed = false;
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: Container(
-          padding: EdgeInsets.only(top: 70.0, left: 20.0, right: 20.0),
-          child: Column(
-            children: <Widget>[
-              Text(
-                "Best Video call app",
-                style: TextStyle(
-                    fontSize: 35,
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: 1.2),
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              Center(child: loginButton())
-            ],
+    return Scaffold(
+      backgroundColor: UniversalVariables.blackColor,
+      body: Stack(
+        children: [
+          Center(
+            child: loginButton(),
           ),
-        ),
+          isLoginPressed
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Container()
+        ],
       ),
     );
   }
 
   Widget loginButton() {
-    return FloatingActionButton(
-      child: Icon(Icons.arrow_forward_ios),
-      elevation: 10.0,
+    return FlatButton(
+      padding: EdgeInsets.all(35),
+      child: Text(
+        "LOGIN",
+        style: TextStyle(
+            fontSize: 35, fontWeight: FontWeight.w900, letterSpacing: 1.2),
+      ),
       onPressed: () => performLogin(),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
     );
   }
 
   void performLogin() {
     print("tring to perform login");
-    _repository.signIn().then((FirebaseUser user) {
-      print("something");
+
+    setState(() {
+      isLoginPressed = true;
+    });
+
+    _authMethods.signIn().then((FirebaseUser user) {
       if (user != null) {
         authenticateUser(user);
       } else {
@@ -59,9 +65,13 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void authenticateUser(FirebaseUser user) {
-    _repository.authenticateUser(user).then((isNewUser) {
+    _authMethods.authenticateUser(user).then((isNewUser) {
+      setState(() {
+        isLoginPressed = false;
+      });
+
       if (isNewUser) {
-        _repository.addDataToDb(user).then((value) {
+        _authMethods.addDataToDb(user).then((value) {
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) {
             return HomeScreen();

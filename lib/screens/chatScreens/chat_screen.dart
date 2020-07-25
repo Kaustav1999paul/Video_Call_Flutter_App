@@ -9,7 +9,11 @@ import 'package:video_call_app/enum/view_state.dart';
 import 'package:video_call_app/models/message.dart';
 import 'package:video_call_app/models/user.dart';
 import 'package:video_call_app/provider/image_upload_provider.dart';
+import 'package:video_call_app/resources/auth_methods.dart';
+import 'package:video_call_app/resources/chat_methods.dart';
 import 'package:video_call_app/resources/firebase_repository.dart';
+import 'package:video_call_app/resources/storage_methods.dart';
+import 'package:video_call_app/screens/callScreens/pickup/pickup_layout.dart';
 import 'package:video_call_app/screens/chatScreens/widgets/cached_image.dart';
 import 'package:video_call_app/utils/call_utilities.dart';
 import 'package:video_call_app/utils/permissions.dart';
@@ -31,7 +35,9 @@ class _ChatScreenState extends State<ChatScreen> {
   TextEditingController textFieldController = TextEditingController();
   FocusNode textFieldFocus = FocusNode();
 
-  FirebaseRepository _repository = FirebaseRepository();
+  final StorageMethods _storageMethods = StorageMethods();
+  final ChatMethods _chatMethods = ChatMethods();
+  final AuthMethods _authMethods = AuthMethods();
 
   ScrollController _listScrollController = ScrollController();
 
@@ -48,7 +54,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   void initState() {
     super.initState();
-    _repository.getCurrentUser().then((user) {
+    _authMethods.getCurrentUser().then((user) {
       _currentUserId = user.uid;
 
       setState(() {
@@ -71,28 +77,36 @@ class _ChatScreenState extends State<ChatScreen> {
     });
   }
 
+  showEmojiContainer() {
+    setState(() {
+      showEmojiPicker = true;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     _imageUploadProvider = Provider.of<ImageUploadProvider>(context);
 
-    return Scaffold(
-      backgroundColor: UniversalVariables.blackColor,
-      appBar: customAppBar(context),
-      body: Column(
-        children: <Widget>[
-          Flexible(
-            child: messageList(),
-          ),
-          _imageUploadProvider.getViewState == ViewState.LOADING
-              ? Container(
-                  alignment: Alignment.centerRight,
-                  margin: EdgeInsets.only(right: 15),
-                  child: CircularProgressIndicator(),
-                )
-              : Container(),
-          chatControls(),
-          Container(),
-        ],
+    return PickupLayout(
+      scaffold: Scaffold(
+        backgroundColor: UniversalVariables.blackColor,
+        appBar: customAppBar(context),
+        body: Column(
+          children: <Widget>[
+            Flexible(
+              child: messageList(),
+            ),
+            _imageUploadProvider.getViewState == ViewState.LOADING
+                ? Container(
+                    alignment: Alignment.centerRight,
+                    margin: EdgeInsets.only(right: 15),
+                    child: CircularProgressIndicator(),
+                  )
+                : Container(),
+            chatControls(),
+            Container(),
+          ],
+        ),
       ),
     );
   }
@@ -184,7 +198,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 message.photoUrl,
                 height: 250,
                 width: 250,
-                radius: 30,
+                radius: 10,
               )
             : Text("Url was null");
   }
@@ -310,7 +324,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
       textFieldController.text = "";
 
-      _repository.addMessageToDb(_message, sender, widget.receiver);
+      _chatMethods.addMessageToDb(_message, sender, widget.receiver);
     }
 
     return Container(
@@ -369,7 +383,8 @@ class _ChatScreenState extends State<ChatScreen> {
                   onPressed: () {
                     if (!showEmojiPicker) {
                       // keyboard is visible
-
+                      hideKeyboard();
+                      showEmojiContainer();
                     } else {
                       //keyboard is hidden
                       showKeyboard();
@@ -414,7 +429,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   void pickImage({@required ImageSource source}) async {
     File selectedImage = await Utils.pickImage(source: source);
-    _repository.uploadImage(
+    _storageMethods.uploadImage(
         image: selectedImage,
         receiverId: widget.receiver.uid,
         senderId: _currentUserId,
@@ -443,7 +458,10 @@ class _ChatScreenState extends State<ChatScreen> {
           onPressed: () async =>
               await Permissions.cameraAndMicrophonePermissionsGranted()
                   ? CallUtils.dial(
-                      from: sender, to: widget.receiver, context: context)
+                      from: sender,
+                      to: widget.receiver,
+                      context: context,
+                    )
                   : {},
         ),
         IconButton(

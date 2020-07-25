@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:video_call_app/enum/view_state.dart';
 
 class ImageUploadProvider with ChangeNotifier {
