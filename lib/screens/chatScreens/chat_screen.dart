@@ -166,7 +166,7 @@ class _ChatScreenState extends State<ChatScreen> {
     Radius messageRadius = Radius.circular(10);
 
     return Container(
-      margin: EdgeInsets.only(top: 12),
+      margin: EdgeInsets.only(top: 0),
       constraints:
           BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.65),
       decoration: BoxDecoration(
@@ -205,13 +205,14 @@ class _ChatScreenState extends State<ChatScreen> {
 
   Widget receiverLayout(Message message) {
     Radius messageRadius = Radius.circular(10);
+    List<Color> gracolors = [Color(0xff00b6f3), Color(0xff46dc64)];
 
     return Container(
-      margin: EdgeInsets.only(top: 12),
+      margin: EdgeInsets.only(top: 0),
       constraints:
           BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.65),
       decoration: BoxDecoration(
-        color: UniversalVariables.receiverColor,
+        gradient: LinearGradient(colors: gracolors),
         borderRadius: BorderRadius.only(
           bottomRight: messageRadius,
           topRight: messageRadius,
@@ -230,81 +231,6 @@ class _ChatScreenState extends State<ChatScreen> {
       setState(() {
         isWriting = val;
       });
-    }
-
-    addMediaModal(context) {
-      showModalBottomSheet(
-          context: context,
-          elevation: 0,
-          backgroundColor: UniversalVariables.blackColor,
-          builder: (context) {
-            return Column(
-              children: <Widget>[
-                Container(
-                  padding: EdgeInsets.symmetric(vertical: 15),
-                  child: Row(
-                    children: <Widget>[
-                      FlatButton(
-                        child: Icon(
-                          Icons.close,
-                        ),
-                        onPressed: () => Navigator.maybePop(context),
-                      ),
-                      Expanded(
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            "Content and tools",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Flexible(
-                  child: ListView(
-                    children: <Widget>[
-                      ModalTile(
-                        title: "Media",
-                        subtitle: "Share Photos and Video",
-                        icon: Icons.image,
-                        onTap: () => pickImage(source: ImageSource.gallery),
-                      ),
-                      ModalTile(
-                        title: "File",
-                        subtitle: "Share files",
-                        icon: Icons.tab,
-                      ),
-                      ModalTile(
-                        title: "Contact",
-                        subtitle: "Share contacts",
-                        icon: Icons.contacts,
-                      ),
-                      ModalTile(
-                        title: "Location",
-                        subtitle: "Share a location",
-                        icon: Icons.add_location,
-                      ),
-                      ModalTile(
-                        title: "Schedule Call",
-                        subtitle: "Arrange a skype call and get reminders",
-                        icon: Icons.schedule,
-                      ),
-                      ModalTile(
-                        title: "Create Poll",
-                        subtitle: "Share polls",
-                        icon: Icons.poll,
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            );
-          });
     }
 
     sendMessage() {
@@ -332,7 +258,7 @@ class _ChatScreenState extends State<ChatScreen> {
       child: Row(
         children: <Widget>[
           GestureDetector(
-            onTap: () => addMediaModal(context),
+            onTap: () => pickImage(source: ImageSource.gallery),
             child: Container(
               padding: EdgeInsets.all(5),
               decoration: BoxDecoration(
@@ -343,7 +269,7 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
           ),
           SizedBox(
-            width: 5,
+            width: 10,
           ),
           Expanded(
             child: Stack(
@@ -377,40 +303,20 @@ class _ChatScreenState extends State<ChatScreen> {
                     fillColor: UniversalVariables.separatorColor,
                   ),
                 ),
-                IconButton(
-                  splashColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  onPressed: () {
-                    if (!showEmojiPicker) {
-                      // keyboard is visible
-                      hideKeyboard();
-                      showEmojiContainer();
-                    } else {
-                      //keyboard is hidden
-                      showKeyboard();
-                      hideEmojiContainer();
-                    }
-                  },
-                  icon: Icon(Icons.face),
-                ),
               ],
             ),
           ),
           isWriting
               ? Container()
-              : Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
-                  child: Icon(Icons.record_voice_over),
-                ),
-          isWriting
-              ? Container()
               : GestureDetector(
-                  child: Icon(Icons.camera_alt),
+                  child: Container(
+                      margin: EdgeInsets.only(left: 10.0),
+                      child: Icon(Icons.camera_alt)),
                   onTap: () => pickImage(source: ImageSource.camera),
                 ),
           isWriting
               ? Container(
-                  margin: EdgeInsets.only(left: 10),
+                  margin: EdgeInsets.only(left: 20),
                   decoration: BoxDecoration(
                       gradient: UniversalVariables.fabGradient,
                       shape: BoxShape.circle),
@@ -440,13 +346,13 @@ class _ChatScreenState extends State<ChatScreen> {
     return CustomAppBar(
       leading: IconButton(
         icon: Icon(
-          Icons.arrow_back,
+          Icons.arrow_back_ios,
         ),
         onPressed: () {
           Navigator.pop(context);
         },
       ),
-      centerTitle: false,
+      centerTitle: true,
       title: Text(
         widget.receiver.name,
       ),
@@ -464,12 +370,6 @@ class _ChatScreenState extends State<ChatScreen> {
                     )
                   : {},
         ),
-        IconButton(
-          icon: Icon(
-            Icons.phone,
-          ),
-          onPressed: () {},
-        )
       ],
     );
   }

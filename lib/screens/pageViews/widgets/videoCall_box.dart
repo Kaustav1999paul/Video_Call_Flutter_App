@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:video_call_app/utils/universal_variables.dart';
 
-class QuietBox extends StatelessWidget {
+class VideoCallBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -18,7 +18,7 @@ class QuietBox extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Text(
-                "No chats yet.",
+                "No Calls yet.",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   letterSpacing: 2,
@@ -27,10 +27,10 @@ class QuietBox extends StatelessWidget {
                   fontSize: 25,
                 ),
               ),
-              Image.asset('assets/chat.png'),
+              Image.asset('assets/facetime.png'),
               SizedBox(height: 25),
               Text(
-                "All the recent chats will be listed here.",
+                "All the recent calls will be listed here.",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   letterSpacing: 1.2,

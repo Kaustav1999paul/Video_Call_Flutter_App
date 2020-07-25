@@ -8,8 +8,6 @@ import 'package:video_call_app/resources/chat_methods.dart';
 import 'package:video_call_app/screens/chatScreens/chat_screen.dart';
 import 'package:video_call_app/screens/chatScreens/widgets/cached_image.dart';
 import 'package:video_call_app/screens/pageViews/widgets/last_message_container.dart';
-import 'package:video_call_app/screens/pageViews/widgets/online_dot_indicator.dart';
-import 'package:video_call_app/utils/universal_variables.dart';
 import 'package:video_call_app/widgets/custom_tile.dart';
 
 class ContactView extends StatelessWidget {
@@ -72,17 +70,10 @@ class ViewLayout extends StatelessWidget {
       ),
       leading: Container(
         constraints: BoxConstraints(maxHeight: 60, maxWidth: 60),
-        child: Stack(
-          children: <Widget>[
-            CachedImage(
-              contact.profilePhoto,
-              radius: 80,
-              isRound: true,
-            ),
-            OnlineDotIndicator(
-              uid: contact.uid,
-            ),
-          ],
+        child: CachedImage(
+          contact.profilePhoto,
+          radius: 80,
+          isRound: true,
         ),
       ),
     );

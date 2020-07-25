@@ -2,32 +2,25 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:video_call_app/models/contact.dart';
+import 'package:video_call_app/models/user.dart';
 import 'package:video_call_app/provider/user_provider.dart';
 import 'package:video_call_app/resources/chat_methods.dart';
-import 'package:video_call_app/resources/firebase_repository.dart';
 import 'package:video_call_app/screens/callScreens/pickup/pickup_layout.dart';
 import 'package:video_call_app/screens/pageViews/widgets/contact_view.dart';
-import 'package:video_call_app/screens/pageViews/widgets/new_chat_button.dart';
 import 'package:video_call_app/screens/pageViews/widgets/quiet_box.dart';
 import 'package:video_call_app/screens/pageViews/widgets/user_circle.dart';
 import 'package:video_call_app/screens/search_screen.dart';
 import 'package:video_call_app/utils/universal_variables.dart';
-import 'package:video_call_app/utils/utilities.dart';
 import 'package:video_call_app/widgets/appbar.dart';
-import 'package:video_call_app/widgets/custom_tile.dart';
 
 class ChatListScreen extends StatelessWidget {
   CustomAppBar customAppBar(BuildContext context) {
+    final UserProvider userProvider = Provider.of<UserProvider>(context);
+    final User user = userProvider.getUser;
+
     return CustomAppBar(
-      leading: IconButton(
-        icon: Icon(
-          Icons.notifications,
-          color: Colors.white,
-        ),
-        onPressed: () {},
-      ),
-      title: UserCircle(),
       centerTitle: true,
+      title: UserCircle(),
       actions: <Widget>[
         IconButton(
           icon: Icon(
@@ -35,15 +28,13 @@ class ChatListScreen extends StatelessWidget {
             color: Colors.white,
           ),
           onPressed: () {
-            Navigator.pushNamed(context, "/search_screen");
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SearchScreen(),
+              ),
+            );
           },
-        ),
-        IconButton(
-          icon: Icon(
-            Icons.more_vert,
-            color: Colors.white,
-          ),
-          onPressed: () {},
         ),
       ],
     );
@@ -55,7 +46,6 @@ class ChatListScreen extends StatelessWidget {
       scaffold: Scaffold(
         backgroundColor: UniversalVariables.blackColor,
         appBar: customAppBar(context),
-        floatingActionButton: NewChatButton(),
         body: ChatListContainer(),
       ),
     );

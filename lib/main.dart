@@ -1,11 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:video_call_app/provider/image_upload_provider.dart';
 import 'package:video_call_app/provider/user_provider.dart';
 import 'package:video_call_app/resources/auth_methods.dart';
-import 'package:video_call_app/resources/firebase_repository.dart';
 import 'package:video_call_app/screens/homeScreen.dart';
 import 'package:video_call_app/screens/loginScreen.dart';
 import 'package:video_call_app/screens/search_screen.dart';
@@ -28,7 +26,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (_) => UserProvider()),
       ],
       child: MaterialApp(
-        title: "Skype Clone",
+        title: "Video Chat",
         debugShowCheckedModeBanner: false,
         initialRoute: '/',
         routes: {

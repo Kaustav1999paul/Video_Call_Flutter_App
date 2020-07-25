@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 import 'package:image/image.dart' as Im;
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:video_call_app/enum/user_state.dart';
@@ -61,5 +62,11 @@ class Utils {
       default:
         return UserState.Waiting;
     }
+  }
+
+  static String formatDateString(String dateString) {
+    DateTime dateTime = DateTime.parse(dateString);
+    var formatter = DateFormat('dd/MM/yy');
+    return formatter.format(dateTime);
   }
 }

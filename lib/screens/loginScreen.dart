@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:video_call_app/resources/auth_methods.dart';
 import 'package:video_call_app/resources/firebase_repository.dart';
 import 'package:video_call_app/screens/homeScreen.dart';
@@ -18,30 +19,51 @@ class LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: UniversalVariables.blackColor,
-      body: Stack(
-        children: [
-          Center(
-            child: loginButton(),
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
+          padding: EdgeInsets.all(50),
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/background.jpg'),
+                  fit: BoxFit.cover)),
+          child: Stack(
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    "Stay Connected",
+                    style: GoogleFonts.comfortaa(
+                        fontSize: 50, fontWeight: FontWeight.w900),
+                  ),
+                  SizedBox(
+                    height: 90,
+                  ),
+                  loginButton(),
+                  SizedBox(
+                    height: 50,
+                  ),
+                ],
+              ),
+              isLoginPressed
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : Container()
+            ],
           ),
-          isLoginPressed
-              ? Center(
-                  child: CircularProgressIndicator(),
-                )
-              : Container()
-        ],
+        ),
       ),
     );
   }
 
   Widget loginButton() {
-    return FlatButton(
-      padding: EdgeInsets.all(35),
-      child: Text(
-        "LOGIN",
-        style: TextStyle(
-            fontSize: 35, fontWeight: FontWeight.w900, letterSpacing: 1.2),
+    return FloatingActionButton(
+      elevation: 10,
+      child: Icon(
+        Icons.arrow_forward_ios,
+        color: Colors.white,
       ),
       onPressed: () => performLogin(),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),

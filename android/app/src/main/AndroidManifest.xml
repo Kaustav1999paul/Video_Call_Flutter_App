@@ -16,7 +16,7 @@
 <uses-permission android:name="android.permission.BLUETOOTH" />
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="video_call_app"
+        android:label="Video Chat"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
