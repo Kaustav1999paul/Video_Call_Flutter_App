@@ -10,17 +10,17 @@ This Covers the following features -
 
 ----------------------------------------------------------------------------------------------
 
-# [ Languages and backend System ]
+[ Languages and backend System ]
 
-ForntEnd => ( Flutter , Dart )
+ForntEnd => ( Flutter , Dart ) || 
 Database => (Firebase , Firestore)
 
 
-# screenshot 
+# Screenshot 
 
-<img src="login.png" height="80"/><img src="home.png" height="80"/>
-<img src="chat_screen.png" height="80"/><img src="call.png" height="80"/>
-<img src="search.png" height="80"/>
+<img src="login.png" height="180"/><img src="home.png" height="180"/>
+<img src="chat_screen.png" height="180"/><img src="call.png" height="180"/>
+<img src="search_screen.png" height="180"/>
 
 
 
