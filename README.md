@@ -1,16 +1,26 @@
-# video_call_app
+# Video Call Flutter Application
 
-A new Flutter project.
+This is a fully functional video call flutter application similar to Whatsapp and Skype.
+This Covers the following features -
 
-## Getting Started
++) Chatinng with people
++) Intelligent Search feature 
++) Live HD Video call
++) Modern UI
 
-This project is a starting point for a Flutter application.
+----------------------------------------------------------------------------------------------
 
-A few resources to get you started if this is your first Flutter project:
+# [ Languages and backend System ]
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+ForntEnd => ( Flutter , Dart )
+Database => (Firebase , Firestore)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+# screenshot 
+
+<img src="login.png" height="80"/><img src="home.png" height="80"/>
+<img src="chat_screen.png" height="80"/><img src="call.png" height="80"/>
+<img src="search.png" height="80"/>
+
+
+
