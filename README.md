@@ -18,9 +18,9 @@ Database => (Firebase , Firestore)
 
 # Screenshot 
 
-<img src="login.png" height="180"/><img src="home.png" height="180"/>
-<img src="chat_screen.png" height="180"/><img src="call.png" height="180"/>
-<img src="search_screen.png" height="180"/>
+<img src="login.png" height="280"/><img src="home.png" height="280"/>
+<img src="chat_screen.png" height="280"/><img src="call.png" height="280"/>
+<img src="search_screen.png" height="280"/>
 
 
 
